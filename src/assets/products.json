@@ -1,0 +1,34 @@
+{
+ "products": [
+  {
+   "id": "1",
+   "name": "Cube",
+   "price": 9500,
+   "stock": 4
+  },
+  {
+   "id": "2",
+   "name": "Scott",
+   "price": 10500,
+   "stock": 1
+  },
+  {
+   "id": "3",
+   "name": "Vitus",
+   "price": 10000,
+   "stock": 0
+  },
+  {
+   "id": "4",
+   "name": "Specialized",
+   "price": 13000,
+   "stock": 3
+  },
+  {
+   "id": "5",
+   "name": "Cannondale",
+   "price": 14500,
+   "stock": 5
+  }
+]
+}
