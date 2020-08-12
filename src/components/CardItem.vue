@@ -1,8 +1,14 @@
 <template lang="pug">
   .card-item.col-12.col-sm-6.col-md-3.m-3.py-3
-    h1 {{ brand }} : {{ model }}
+    h1 {{ brand }}
+    p {{ model }}
     img(src='../assets/bike.png' width='200px')
-    p.mb-5 Stock: {{ stock }}
+
+    p.stock-container.mb-5
+      span(v-if="stock > 5") In stock
+      span(v-else-if="stock > 0 && stock < 5") Only {{ stock }} left
+      span(v-else) Out of stock
+
     .price-part.d-flex.justify-content-between.align-items-center
       h5.d-inline.mb-0.
         {{price}} $

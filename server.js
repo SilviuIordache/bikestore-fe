@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const path = require('path');
 const cors = require('cors');
+const history = require('connect-history-api-fallback');
 
 const app = express();
 
@@ -19,9 +20,11 @@ app.use(helmet());
 // enable logging
 app.use(morgan('short'));
 
+// history mode
+app.use(history({ history: 'src/index.html' }));
+
 // file server
 app.use('/', express.static(path.join(__dirname, './build')))
-
 
 const port = 8001;
 const hostname = 'localhost';

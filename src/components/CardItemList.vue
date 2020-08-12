@@ -28,14 +28,11 @@ export default {
   methods: {
     async getBikes() {
       const url = 'http://localhost:3000/api/v1/bikes';
-      // const url = 'https://pokeapi.co/api/v2/pokemon/ditto';
       let response;
       try {
         response = await this.$http.get(url);
       } catch (err) {
         console.log(`Error retrieving items: ${err}`)
-      } finally {
-        console.log(response);
       }
       if (response) {
         this.items = response.data.data.bikes;
