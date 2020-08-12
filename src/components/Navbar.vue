@@ -8,8 +8,8 @@
         router-link(to="/") Home
       li
         router-link(to="/about") About
-      li Offers
-      li Brands
+      li
+        router-link(to="/addProduct") Create
     .shopping-cart
       i.fas.fa-shopping-cart.mr-2
       | CART
