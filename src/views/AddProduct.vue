@@ -1,7 +1,5 @@
 <template lang="pug">
-  form.ml-4(
-    method="POST"
-    @submit.prevent="")
+  form.ml-4( method="POST" @submit.prevent="")
     h1 Add new bike
     .form-field
       label(for="brand-select") Brand
@@ -44,7 +42,12 @@ export default {
           'stock': this.stock
         }
         const response = await this.$http.post(url, body);
-        console.log(response);
+        
+        if (response.status === 201) {
+          this.$router.push({ path: 'addSuccess' })
+        } else {
+          console.log('There was an error on our side. Please try again.')
+        }
       } else {
         console.log('form fields not valid')
       }
