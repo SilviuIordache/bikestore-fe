@@ -6,6 +6,7 @@ import App from './App.vue';
 import router from './router/index.js'
 
 Vue.prototype.$http = axios;
+Vue.config.devtools = true
 
 const app = new Vue({
  el: '#app',
