@@ -2,7 +2,7 @@
   .card-item.col-12.col-sm-6.col-md-3.m-3.py-3
     h1 {{ brand }}
     p {{ model }}
-    img(src='../assets/bike.png' width='200px')
+    img(:src='imagePath' width='200px')
 
     p.stock-container.mb-5
       span(v-if="stock > 5") In stock
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'ShopItemCard',
+  name: 'CardItem',
   props: {
     brand: {
       type: String,
@@ -41,7 +41,18 @@ export default {
       default: 0,
       required: true,
     },
+    imageName: {
+      type: String,
+      default: '',
+      required: true
+    }
   },
+  computed: {
+    imagePath() {
+      const path = 'http://localhost:3000/static/' + this.imageName;
+      return path;
+    }
+  }
 };
 </script>
 

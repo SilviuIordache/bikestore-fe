@@ -7,7 +7,8 @@
           :brand="item.brand"
           :model="item.model"
           :price="item.price"
-          :stock="item.stock")
+          :stock="item.stock"
+          :imageName="item.imageName")
 </template>
 
 <script>
