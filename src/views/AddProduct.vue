@@ -9,15 +9,15 @@
 
     .form-field
       label(for="model") Model
-      input(type="text" name="model" v-model="model" id="model" required)
+      input(type="text" name="model" v-model="model" id="model")
 
     .form-field
       label(for="price") Price ($)
-      input(type="number" name="price" v-model="price" id="price" placeholder="1000" required)
+      input(type="number" name="price" v-model="price" id="price" placeholder="1000")
 
     .form-field
       label(for="stock") Stock
-      input(type="number" name="stock" v-model="stock" id="stock" placeholder="5" required)
+      input(type="number" name="stock" v-model="stock" id="stock" placeholder="5")
 
     .form-field
       label(for="photo") Upload photo(s)
@@ -40,10 +40,10 @@ export default {
   data() {
     return {
       brands: ['Canyon', 'Cube', 'Merida', 'Vitus', 'YT', 'Yeti'],
-      brand: '',
-      model: '',
-      price: '',
-      stock: '',
+      brand: 'default',
+      model: 'default',
+      price: 'default',
+      stock: 'default',
       file: '',
       validFile: false,
       maxFileSize: 3 * 1000000
@@ -69,6 +69,7 @@ export default {
         formData.append('model', this.model);
         formData.append('price', this.price);
         formData.append('stock', this.stock);
+        formData.append('imageName', this.file.name);
 
         let options = { headers: {'content-type': 'multipart/form-data'} }
 
@@ -86,7 +87,7 @@ export default {
       }
     },
     getSizeInMB(value) {
-      return (value/ (Math.pow(10, 6))).toFixed(1)
+      return (value/ (Math.pow(10, 6))).toFixed(3)
     }
   }
 };
