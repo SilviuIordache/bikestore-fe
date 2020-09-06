@@ -1,8 +1,9 @@
 <template lang="pug">
-  .card-item.col-12.col-sm-6.col-md-3.m-3.py-3
+  .card-item.col-12.col-sm-6.col-md-3.m-3.py-3(@click="goToDetailedView()")
     h1 {{ brand }}
     p {{ model }}
-    img(:src='imagePath' width='200px')
+    
+    img(:src='imagePath' width='100%')
 
     p.stock-container.mb-5
       span(v-if="stock > 5") In stock
@@ -21,6 +22,11 @@
 export default {
   name: 'CardItem',
   props: {
+    id: {
+      type: String,
+      default: 'no_ID',
+      required: true,
+    },
     brand: {
       type: String,
       default: 'brand',
@@ -51,6 +57,11 @@ export default {
     imagePath() {
       const path = 'http://localhost:3000/static/' + this.imageName;
       return path;
+    }
+  },
+  methods: {
+    goToDetailedView() {
+      this.$router.push({ path: `/products/${this.id}`, params: { id: this.id } })
     }
   }
 };

@@ -5,6 +5,7 @@ import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import AddProduct from '../views/AddProduct.vue';
 import AddSuccess from '../views/AddSuccess.vue';
+import ItemDetailed from '../views/ItemDetailed.vue';
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const router = new VueRouter({
       path: '/addSuccess',
       name: 'AddSuccess',
       component: AddSuccess
+    },
+    {
+      path: '/products/:id',
+      name: 'ItemDetailed',
+      component: ItemDetailed
     }
   ]
 })

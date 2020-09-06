@@ -2,6 +2,7 @@
   #card-item-list.row
     card-item(
       v-for="item in items"
+      :id="item._id"
       :key="item.id"
       :brand="item.brand"
       :model="item.model"
