@@ -46,4 +46,5 @@ export default {
 <style lang="stylus" scoped>
   #card-item-list
     background-color #f0f2f0
+    border-radius 0.3rem
 </style>
