@@ -1,14 +1,13 @@
 <template lang="pug">
-  .container
-    .row
-        card-item(
-          v-for="item in items"
-          :key="item.id"
-          :brand="item.brand"
-          :model="item.model"
-          :price="item.price"
-          :stock="item.stock"
-          :imageName="item.imageName")
+  #card-item-list.row
+    card-item(
+      v-for="item in items"
+      :key="item.id"
+      :brand="item.brand"
+      :model="item.model"
+      :price="item.price"
+      :stock="item.stock"
+      :imageName="item.imageName")
 </template>
 
 <script>
@@ -44,6 +43,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  ul
-    list-style-type none
+  #card-item-list
+    background-color #f0f2f0
 </style>

@@ -58,7 +58,7 @@ export default {
 
 <style scoped lang="stylus">
   .card-item
-    background-color #fafafa
+    background-color white
   img
     background-color transparent
 </style>

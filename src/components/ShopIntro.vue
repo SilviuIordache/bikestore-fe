@@ -1,12 +1,13 @@
 <template lang="pug">
-  .hello
-    h1 {{ msg }}
-    p Browse and find your ideal bike in our selection of 100+ cool bikes
+  .row.mt-3
+    .col
+      h1 {{ msg }}
+      p Browse and find your ideal bike in our selection of 100+ cool bikes
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'ShopIntro',
   props: {
     msg: String,
   },
