@@ -1,12 +1,13 @@
+import '@babel/polyfill';
 import Vue from 'vue';
 import axios from 'axios';
-import '@babel/polyfill';
 
 import App from './App.vue';
 import router from './router/index.js'
 
+
 Vue.prototype.$http = axios;
-Vue.config.devtools = true
+Vue.config.devtools = true;
 
 const app = new Vue({
  el: '#app',
