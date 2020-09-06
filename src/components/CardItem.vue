@@ -70,6 +70,11 @@ export default {
 <style scoped lang="stylus">
   .card-item
     background-color white
+    cursor pointer
+    border-radius 0.3rem
+    transition all .2s ease-in-out
+    &:hover
+      transform scale(1.04)
   img
     background-color transparent
 </style>
