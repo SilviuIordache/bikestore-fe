@@ -1,6 +1,6 @@
 <template lang="pug">
   #card-item-list.row.px-1
-    .col-12.col-md-6.col-lg-4.d-flex.py-2.px-1(v-for="item in items")
+    .col-12.col-md-6.col-lg-4.d-flex.p-1(v-for="item in items")
       card-item(
         :id="item._id"
         :key="item.id"
