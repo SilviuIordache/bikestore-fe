@@ -1,5 +1,5 @@
 <template lang="pug">
-  #card-item-list.row
+  #card-item-list.row.px-1
     card-item(
       v-for="item in items"
       :id="item._id"
