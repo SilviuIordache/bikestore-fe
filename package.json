@@ -4,9 +4,10 @@
   "description": "A bike e-commerce site",
   "main": "main.js",
   "scripts": {
-    "dev": "parcel index.html",
+    "dev": "npm run watch & npm start",
     "build": "parcel build ./src/index.html --out-dir build/",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "parcel watch ./src/index.html --no-cache --out-dir build/",
     "start": "node server.js"
   },
   "author": "Silviu Iordache",
