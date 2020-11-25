@@ -1,24 +1,23 @@
 <template lang="pug">
-  .col-12.col-sm-6.col-md-4.d-flex.py-2.px-1
-    .card-item.d-flex.flex-column.justify-content-between.p-3(@click="goToDetailedView()")
-      .bike-name
-        h1.mb-0 {{ brand }}
-        p {{ model }}
-      
-      .bike-image
-        img(:src='imagePath' width='100%')
+  .card-item.d-flex.flex-column.justify-content-between.p-3(@click="goToDetailedView()")
+    .bike-name
+      h1.mb-0 {{ brand }}
+      p {{ model }}
+    
+    .bike-image.px-3
+      img(:src='imagePath' width='100%')
 
-      .bike-price-details
-        p.stock-container.mb-5.text-center.text-muted.mt-2
-          span(v-if="stock > 0 && stock < 5") {{ stock }} items left
-          span(v-if="stock==0") Out of stock
+    .bike-price-details
+      p.stock-container.mb-5.text-center.text-muted.mt-2
+        span(v-if="stock > 0 && stock < 5") {{ stock }} items left
+        span(v-if="stock==0") Out of stock
 
-        .price-part.d-flex.justify-content-between.align-items-center
-          h5.d-inline.mb-0.
-            {{price}} $
-          .add-to-cart-button
-            i.fas.fa-cart-plus.mr-2
-            | Add
+      .price-part.d-flex.justify-content-between.align-items-center
+        h5.d-inline.mb-0.
+          {{price}} $
+        .add-to-cart-button
+          i.fas.fa-cart-plus.mr-2
+          | Add
 </template>
 
 <script>
