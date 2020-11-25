@@ -1,14 +1,14 @@
 <template lang="pug">
   #card-item-list.row.px-1
-    card-item(
-      v-for="item in items"
-      :id="item._id"
-      :key="item.id"
-      :brand="item.brand"
-      :model="item.model"
-      :price="item.price"
-      :stock="item.stock"
-      :imageName="item.imageName")
+    .col-12.col-sm-6.col-md-4.d-flex.py-2.px-1(v-for="item in items")
+      card-item(
+        :id="item._id"
+        :key="item.id"
+        :brand="item.brand"
+        :model="item.model"
+        :price="item.price"
+        :stock="item.stock"
+        :imageName="item.imageName")
 </template>
 
 <script>
