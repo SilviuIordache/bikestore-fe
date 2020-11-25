@@ -1,15 +1,11 @@
 <template lang="pug">
   .navbar.d-flex.justify-content-between.py-3
-    .logo
+    router-link(to="/")
       i.fas.fa-bicycle.mr-2
       | BIKESHOP
     ul.mb-0
       li
-        router-link(to="/") Home
-      li
-        router-link(to="/about") About
-      li
-        router-link(to="/addProduct") Create
+        router-link(to="/addProduct") + Add Bike
     .shopping-cart
       i.fas.fa-shopping-cart.mr-2
       | CART

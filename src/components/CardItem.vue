@@ -1,21 +1,24 @@
 <template lang="pug">
-  .card-item.col-12.col-sm-6.col-md-3.m-3.py-3(@click="goToDetailedView()")
-    h1 {{ brand }}
-    p {{ model }}
+  .card-item.col-12.col-sm-6.col-md-3.py-3.m-1.d-flex.flex-column.justify-content-between(@click="goToDetailedView()")
+
+    .bike-name
+      h1.mb-0 {{ brand }}
+      p {{ model }}
     
-    img(:src='imagePath' width='100%')
+    .bike-image
+      img(:src='imagePath' width='100%')
 
-    p.stock-container.mb-5
-      span(v-if="stock > 5") In stock
-      span(v-else-if="stock > 0 && stock < 5") Only {{ stock }} left
-      span(v-else) Out of stock
+    .bike-price-details
+      p.stock-container.mb-5
+        span(v-if="stock > 0 && stock < 5") {{ stock }} left
+        span(v-if="stock==0") Out of stock
 
-    .price-part.d-flex.justify-content-between.align-items-center
-      h5.d-inline.mb-0.
-        {{price}} $
-      span
-        i.fas.fa-cart-plus
-        | Add
+      .price-part.d-flex.justify-content-between.align-items-center
+        h5.d-inline.mb-0.
+          {{price}} $
+        .add-to-cart-button
+          i.fas.fa-cart-plus.mr-2
+          | Add
 </template>
 
 <script>
@@ -74,7 +77,19 @@ export default {
     border-radius 0.3rem
     transition all .2s ease-in-out
     &:hover
+      box-shadow 2px 9px 28px -8px rgba(0,0,0,0.75);
       transform scale(1.04)
+      z-index 10000
   img
     background-color transparent
+
+  .add-to-cart-button
+    padding 0.5rem 0.8rem
+    border-radius 0.3rem
+    background-color lightgray
+    transition all .2s ease-in-out
+    &:hover
+      transform scale(1.04)
+      background-color #49b5fc
+
 </style>
