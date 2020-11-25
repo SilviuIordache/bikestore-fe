@@ -1,18 +1,19 @@
 <template lang="pug">
   .container
-    shop-intro(msg="The coolest bike shop")
+    .gallery-banner.py-3
+      h1 Welcome to the Bike Store
+      p Browse, find and buy your ideal bike
     card-item-list(:items="products")
 </template>
 
 <script>
-import ShopIntro from '../components/ShopIntro.vue';
+
 import CardItemList from '../components/CardItemList.vue';
 import products from '../assets/products.json';
 
 export default {
-  name: 'Home',
+  name: 'Gallery',
   components: {
-    'shop-intro': ShopIntro,
     'card-item-list': CardItemList,
   },
   data() {
@@ -25,3 +26,4 @@ export default {
   },
 };
 </script>
+
