@@ -69,7 +69,7 @@ export default {
 };
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus" scoped>
   .card-item
     background-color white
     cursor pointer
