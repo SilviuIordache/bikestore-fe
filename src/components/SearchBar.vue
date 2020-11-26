@@ -1,6 +1,13 @@
 <template lang="pug">
-  .search-bar
-    input#search-input(type="text" :placeholder="placeholderText" @focus="removePlaceholder()" @blur="addPlaceholder()")
+  .search-bar.d-flex
+    input#search-input(
+      type="text"
+      v-model="searchString"
+      :placeholder="placeholderText"
+      @focus="removeInputPlaceholder()"
+      @blur="addInputPlaceholder()")
+    button#search-button(@click="emitSearch()")
+      i.fas.fa-search
 </template>
 
 <script>
@@ -8,17 +15,22 @@ export default {
   name: 'SearchBar',
   data() {
     return {
-      placeholderText: 'Cube Stereo..'
+      placeholderText: ' Cube Stereo..',
+      searchString: ''
     }
   },
   methods: {
-    addPlaceholder() {
+    addInputPlaceholder() {
       document.getElementById('search-input').placeholder = this.placeholderText;
     },
-    removePlaceholder() {
+    removeInputPlaceholder() {
       document.getElementById('search-input').placeholder = '';
+    },
+    emitSearch() {
+      this.$parent.$emit('search', this.searchString);
+      this.searchString = '';
     }
-  }
+  },
 };
 </script>
 
@@ -26,7 +38,6 @@ export default {
   #search-input
     width 25rem
     height 3rem
-
-
-
+  #search-button
+    width 3rem
 </style>
