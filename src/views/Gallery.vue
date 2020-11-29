@@ -26,11 +26,12 @@ export default {
     this.getBikes();
   },
   methods: {
-    async getBikes() {
-      const url = 'http://localhost:3000/api/v1/bikes';
+    async getBikes(query = '') {
+      const url = `http://localhost:3000/api/v1/bikes`;
+      let param
       let response;
       try {
-        response = await this.$http.get(url);
+        response = await this.$http.get(url, { params: { search: query } });
       } catch (err) {
         console.log(`Error retrieving items: ${err}`)
       }
@@ -40,8 +41,8 @@ export default {
     },
   },
   mounted() {
-    this.$on('search', (searchString) => {
-      console.log(searchString);
+    this.$on('search', (query) => {
+      this.getBikes(query);
     })
   }
 };
