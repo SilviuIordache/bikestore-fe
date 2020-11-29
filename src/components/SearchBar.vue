@@ -2,7 +2,7 @@
   .search-bar.d-flex
     input#search-input(
       type="text"
-      v-model="searchString"
+      v-model="query"
       :placeholder="placeholderText"
       @focus="removeInputPlaceholder()"
       @blur="addInputPlaceholder()")
@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       placeholderText: ' Cube Stereo..',
-      searchString: ''
+      query: ''
     }
   },
   methods: {
@@ -27,8 +27,8 @@ export default {
       document.getElementById('search-input').placeholder = '';
     },
     emitSearch() {
-      this.$parent.$emit('search', this.searchString);
-      this.searchString = '';
+      this.$parent.$emit('search', this.query);
+      this.query = '';
     }
   },
 };
