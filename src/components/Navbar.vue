@@ -1,19 +1,28 @@
 <template lang="pug">
-  .navbar.d-flex.justify-content-between.py-3
+  .navbar.d-flex.justify-content-between.py-4.px-5
     router-link(to="/")
       i.fas.fa-bicycle.mr-2
       | BIKESHOP
     ul.mb-0
       li
-        router-link(to="/addProduct") + Add Bike
+        router-link(to="/addProduct").
+          + Add Bike
     .shopping-cart
-      i.fas.fa-shopping-cart.mr-2
-      | CART
+      router-link(to="/cart")
+        i.fas.fa-shopping-cart.mr-2
+        | CART
+        span.
 </template>
 
 <script>
+import { EventBus } from '../util/EventBus';
 export default {
   name: 'Navbar',
+  mounted() {
+    EventBus.$on('productAddedToCart', (object) => {
+      console.log(object.model);
+    })
+  }
 };
 </script>
 
