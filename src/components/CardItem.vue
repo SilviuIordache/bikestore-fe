@@ -15,12 +15,13 @@
       .price-part.d-flex.justify-content-between.align-items-center
         h5.d-inline.mb-0.
           {{price}} $
-        .add-to-cart-button
+        .add-to-cart-button(@click.stop="addToCart()")
           i.fas.fa-cart-plus.mr-2
           | Add
 </template>
 
 <script>
+import { EventBus } from '../util/EventBus.js';
 export default {
   name: 'CardItem',
   props: {
@@ -64,6 +65,34 @@ export default {
   methods: {
     goToDetailedView() {
       this.$router.push({ path: `/products/${this.id}`, params: { id: this.id } })
+    },
+    addToCart() {
+      let object = {
+        id: this.id,
+        brand: this.brand,
+        model: this.model,
+        price: this.price,
+        amount: 0
+      }
+      EventBus.$emit('productAddedToCart', object)
+
+      let cartItems = JSON.parse(localStorage.getItem('cart-items'));
+      if (cartItems) {
+        let itemInCart = false;
+        for (let i = 0; i < cartItems.length; i++) {
+          if (cartItems[i].id === object.id) {
+            itemInCart = true;
+            cartItems[i].amount++;
+          }
+        }
+        if (!itemInCart) {
+          cartItems.push(object)
+        }
+      } else {
+        cartItems = [];
+        cartItems.push(object)
+      }
+      localStorage.setItem('cart-items', JSON.stringify(cartItems));
     }
   }
 };

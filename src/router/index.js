@@ -6,6 +6,7 @@ import About from '../views/About.vue';
 import AddProduct from '../views/AddProduct.vue';
 import AddSuccess from '../views/AddSuccess.vue';
 import ItemDetailed from '../views/ItemDetailed.vue';
+import ShoppingCart from '../views/ShoppingCart.vue';
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,11 @@ const router = new VueRouter({
       path: '/',
       name: 'Gallery',
       component: Gallery
+    },
+    {
+      path: '/cart',
+      name: 'ShoppingCart',
+      component: ShoppingCart
     },
     {
       path: '/about',
