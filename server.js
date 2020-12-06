@@ -42,20 +42,8 @@ app.get('/app/config', (req, res) => {
   res.json(nconf.get('web'));
 });
 
-const port = config.server.port;
-let hostname;
 
-// const mode = 'production';
-const mode = 'development'
-
-
-if (mode === 'development') {
-  hostname = `http://localhost:${port}`
-} else {
-  hostname = config.server.url;
-}
-
-app.listen(port, () => {
-  console.log(config.server.port)
-  console.log(`Server started: ${hostname}`)
+// Start a UNIX socket and listen for connections on specified path
+app.listen(process.env.PORT || nconf.get('server:port') || 5000, () => {
+  console.log('Bike gallery server started')
 })
