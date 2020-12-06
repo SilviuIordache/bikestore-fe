@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     async getBikes(query = '') {
-      const url = `http://localhost:3000/api/v1/bikes`;
+      const url = `${this.$config.apiUrl}/api/v1/bikes`;
       let param
       let response;
       try {

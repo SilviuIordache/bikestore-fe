@@ -1,0 +1,12 @@
+{
+  "server": {
+    "port": 8001,
+    "url": "https://bikestore-fe.herokuapp.com"
+  },
+  "web": {
+    "apiUrl": {
+      "dev": "http://localhost:3000",
+      "prod": "https://bikestore-be.herokuapp.com"
+    }
+  }
+}
