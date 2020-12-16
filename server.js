@@ -7,8 +7,6 @@ const path = require('path');
 const cors = require('cors');
 const history = require('connect-history-api-fallback');
 
-const config = require('./config.json');
-
 // nconf configuration
 // load process.argv
 nconf.env() 
