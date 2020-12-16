@@ -40,7 +40,6 @@ app.get('/app/config', (req, res) => {
   res.json(nconf.get('web'));
 });
 
-
 // Start a UNIX socket and listen for connections on specified path
 app.listen(process.env.PORT || nconf.get('server:port') || 5000, () => {
   console.log('Bike gallery server started')
