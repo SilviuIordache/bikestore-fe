@@ -5,8 +5,12 @@
   },
   "web": {
     "apiUrl": {
-      "dev": "http://localhost:3000",
+      "dev": "http://localhost:3000/api/v1/bikes",
       "prod": "https://bikestore-be.herokuapp.com"
+    },
+    "imageUrl": {
+      "dev": "http://localhost:3000/static",
+      "prod": "https://bikestore-be.herokuapp.com/static"
     }
   }
 }

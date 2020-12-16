@@ -61,9 +61,8 @@ export default {
     },
     async createProduct() {
       if (this.brand && this.model && this.price && this.stock && this.validFile) {
-        const url = 'http://localhost:3000/api/v1/bikes';
+        const url = `${this.$config.apiUrl}`;        
         const formData = new FormData();
-
         formData.append('file', this.file);
         formData.append('brand', this.brand);
         formData.append('model', this.model);

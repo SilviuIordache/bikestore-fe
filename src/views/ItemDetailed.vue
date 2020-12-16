@@ -1,7 +1,7 @@
 <template lang="pug">
   #detailed-view.container
     .row
-      .col
+      .col(v-if="imageLoaded")
         h1 {{ brand }}
         p {{ model }}
         img(:src='imagePath' width='100%')
@@ -25,7 +25,8 @@ export default {
       model: '',
       stock: '',
       price: '',
-      imageName: ''
+      imageName: '',
+      imageLoaded: false
     }
   },
   mounted() {
@@ -33,10 +34,13 @@ export default {
   },
   methods: {
     async getProductInfo() {
-      const url = `http://localhost:3000/api/v1/bikes/${this.$route.params.id}`;
+      const url = `${this.$config.apiUrl}/${this.$route.params.id}`;
       let response;
       try {
         response = await this.$http.get(url);
+        if (response.status === 200) {
+          this.imageLoaded = true
+        }
       } catch (err) { 
         console.log(`Error retrieving item: ${err}`)
       }
@@ -52,7 +56,7 @@ export default {
   },
   computed: {
     imagePath() {
-      const path = 'http://localhost:3000/static/' + this.imageName;
+      const path = `${this.$config.imageUrl}/${this.imageName}`;
       return path;
     }
   }
