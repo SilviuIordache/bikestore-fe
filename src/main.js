@@ -13,6 +13,7 @@ Vue.config.devtools = true;
 
 let app = null;
 
+// first get the config file and set proper dev/prod urls
 config.get().finally(() => {
   app = new Vue({
     el: '#app',
