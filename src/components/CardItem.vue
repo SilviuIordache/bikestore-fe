@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     imagePath() {
-      const path = 'http://localhost:3000/static/' + this.imageName;
+      const path = `${this.$config.imageUrl}/${this.imageName}`;
       return path;
     }
   },
