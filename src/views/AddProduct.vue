@@ -27,9 +27,15 @@
         name="photo"
         @change="selectFile"
         accept="image/png, image/jpeg")
-      p(v-if="!file") Maximum {{ getSizeInMB(this.maxFileSize) }}MB allowed (png, jpg, jpeg)
-      p.text-danger(v-if="!validFile && file") File size exceeds {{ getSizeInMB(this.maxFileSize) }}MB limit: {{ getSizeInMB(this.file.size) }}MB.
-      p.text-success(v-if="validFile && file") Valid file size: {{ getSizeInMB(this.file.size) }}MB.
+      p(v-if="!file").
+        Maximum {{ getSizeInMB(this.maxFileSize) }}MB allowed (png, jpg, jpeg)
+      p.text-danger(v-if="!validFile && file").
+        File size exceeds {{ getSizeInMB(this.maxFileSize) }}MB limit: {{ getSizeInMB(this.file.size) }}MB.
+      p.text-success(v-if="validFile && file").
+        Valid file size: {{ getSizeInMB(this.file.size) }}MB.
+
+    .preview-container(v-if="validFile")
+      img(:src="previewURL" width="250")
 
     .form-field
       input(type="submit" name="submit" value="Create" @click="createProduct()")
@@ -46,12 +52,15 @@ export default {
       stock: 'default',
       file: '',
       validFile: false,
-      maxFileSize: 3 * 1000000
+      maxFileSize: 3 * 1000000,
+      previewURL: ''
     }
   },
   methods: {
     selectFile() {
       this.file = this.$refs.fileRef.files[0];
+
+      this.previewURL = URL.createObjectURL(this.file);
 
       if (this.file.size < this.maxFileSize) {
         this.validFile = true;
@@ -100,5 +109,4 @@ export default {
   .form-field > label
     display block
     margin-bottom 0
-  
 </style>
