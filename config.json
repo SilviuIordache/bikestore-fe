@@ -1,7 +1,6 @@
 {
   "server": {
-    "port": 8001,
-    "url": "https://bikestore-fe.herokuapp.com"
+    "port": 8001
   },
   "web": {
     "apiUrl": {
