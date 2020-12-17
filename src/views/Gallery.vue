@@ -27,16 +27,22 @@ export default {
     }
   },
   async created() {
-    await this.getBikes();
+    await this.getBikes(this.$route.query);
   },
-  mounted() {
-    this.$on('search', (query) => {
-      this.getBikes(query);
-    })
+  beforeRouteUpdate(to, from, next) {
+    this.getBikes(to.query);
+    window.scrollTo(0, 0);
+    next();
   },
   methods: {
-    async getBikes(query = '') {
-      const url = `${this.$config.apiUrl}/?search=${query}`;
+    async getBikes(query) {
+      let url = `${this.$config.apiUrl}`;
+
+      if(query) {
+        if (query.search) {
+          url += '?search=' + query.search;
+        }
+      }
       let response;
       let requestStartTime = Date.now();
       try {

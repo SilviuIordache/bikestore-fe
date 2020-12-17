@@ -27,8 +27,9 @@ export default {
       document.getElementById('search-input').placeholder = '';
     },
     emitSearch() {
-      if (this.query) {
-        this.$parent.$emit('search', this.query);
+      // avoid duplicate query error
+      if (this.$route.query.search != this.query) {
+        this.$router.push({ path: '/', query: { search: this.query }})
       }
     }
   },
