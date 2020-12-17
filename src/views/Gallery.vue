@@ -4,7 +4,10 @@
       h1 Welcome to the Bike Store
       p Browse, find and buy your ideal bike
     search-bar.mb-2
-    card-item-list(:items="items")
+    .results.mb-2.
+      {{ items.length }} results found in {{ requestTime / 1000 }} seconds.
+    card-item-list(v-if="items.length > 0" :items="items")
+    .no-results-found(v-else) No results found
 </template>
 
 <script>
@@ -19,7 +22,8 @@ export default {
   },
   data() {
     return {
-      items: []
+      items: [],
+      requestTime: 0
     }
   },
   async created() {
@@ -32,13 +36,15 @@ export default {
   },
   methods: {
     async getBikes(query = '') {
-      const url = `${this.$config.apiUrl}`;
-      let param
+      const url = `${this.$config.apiUrl}/?search=${query}`;
       let response;
+      let requestStartTime = Date.now();
       try {
-        response = await this.$http.get(url, { params: { search: query } });
+        response = await this.$http.get(url);
       } catch (err) {
         console.log(`Error retrieving items: ${err}`)
+      } finally {
+        this.requestTime = Date.now() - requestStartTime;
       }
       if (response) {
         this.items = response.data.data.bikes;
