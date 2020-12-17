@@ -23,7 +23,12 @@ export default {
     }
   },
   async created() {
-    this.getBikes();
+    await this.getBikes();
+  },
+  mounted() {
+    this.$on('search', (query) => {
+      this.getBikes(query);
+    })
   },
   methods: {
     async getBikes(query = '') {
@@ -40,11 +45,7 @@ export default {
       }
     },
   },
-  mounted() {
-    this.$on('search', (query) => {
-      this.getBikes(query);
-    })
-  }
+ 
 };
 </script>
 
