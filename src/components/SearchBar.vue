@@ -27,8 +27,9 @@ export default {
       document.getElementById('search-input').placeholder = '';
     },
     emitSearch() {
-      this.$parent.$emit('search', this.query);
-      this.query = '';
+      if (this.query) {
+        this.$parent.$emit('search', this.query);
+      }
     }
   },
 };
