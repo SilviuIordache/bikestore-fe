@@ -15,7 +15,7 @@ export default {
   name: 'SearchBar',
   data() {
     return {
-      placeholderText: ' Cube Stereo..',
+      placeholderText: ' Cube, Canyon, Merida...',
       query: ''
     }
   },
