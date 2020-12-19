@@ -8,7 +8,7 @@
         :model="item.model"
         :price="item.price"
         :stock="item.stock"
-        :imageName="item.imageName")
+        :imageUrl="item.imageUrl")
 </template>
 
 <script>

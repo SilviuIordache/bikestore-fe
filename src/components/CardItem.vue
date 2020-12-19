@@ -5,7 +5,7 @@
       p {{ model }}
     
     .bike-image.px-3
-      img(:src='imagePath' width='100%')
+      img(:src='imageUrl' width='100%')
 
     .bike-price-details
       p.stock-container.mb-5.text-center.text-muted.mt-2
@@ -50,16 +50,10 @@ export default {
       default: 0,
       required: true,
     },
-    imageName: {
+    imageUrl: {
       type: String,
       default: '',
       required: true
-    }
-  },
-  computed: {
-    imagePath() {
-      const path = `${this.$config.imageUrl}/${this.imageName}`;
-      return path;
     }
   },
   methods: {
