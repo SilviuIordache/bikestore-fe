@@ -15,7 +15,7 @@
       .price-part.d-flex.justify-content-between.align-items-center
         h5.d-inline.mb-0.
           {{price}} $
-        .add-to-cart-button(@click.stop="addToCart()")
+        button.add-to-cart-button(@click.stop="addToCart()" :class="{'button-disabled': stock === 0 }")
           i.fas.fa-cart-plus.mr-2
           | Add
 </template>
@@ -105,12 +105,18 @@ export default {
     background-color transparent
 
   .add-to-cart-button
+    border none
     padding 0.5rem 0.8rem
     border-radius 0.3rem
-    background-color lightgray
+    background-color rgb(128, 210, 255)
+    box-shadow 0rem 0.2rem 0.7rem rgba(128, 210, 255, 0.4);
     transition all .2s ease-in-out
     &:hover
       transform scale(1.04)
-      background-color #49b5fc
+
+  .button-disabled
+    background-color rgb(217,217,217)
+    opacity 0.5
+    pointer-events none
 
 </style>
