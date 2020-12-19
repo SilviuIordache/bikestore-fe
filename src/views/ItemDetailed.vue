@@ -4,7 +4,7 @@
       .col(v-if="imageLoaded")
         h1 {{ brand }}
         p {{ model }}
-        img(:src='imagePath' width='100%')
+        img(:src='imageUrl' width='100%')
 
     p.stock-container.mb-5
       span(v-if="stock > 5") In stock
@@ -25,7 +25,7 @@ export default {
       model: '',
       stock: '',
       price: '',
-      imageName: '',
+      imageUrl: '',
       imageLoaded: false
     }
   },
@@ -50,14 +50,8 @@ export default {
         this.model = response.data.data.bike.model;
         this.stock = response.data.data.bike.stock;
         this.price = response.data.data.bike.price;
-        this.imageName = response.data.data.bike.imageName;
+        this.imageUrl = response.data.data.bike.imageUrl;
       }
-    }
-  },
-  computed: {
-    imagePath() {
-      const path = `${this.$config.imageUrl}/${this.imageName}`;
-      return path;
     }
   }
 };
