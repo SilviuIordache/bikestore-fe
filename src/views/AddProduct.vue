@@ -2,22 +2,20 @@
   form.ml-4( method="POST" enctype="multipart/form-data" @submit.prevent="")
     h1 Add new bike
     .form-field
-      label(for="brand-select") Brand
-      select(name="brand" id="brand-select" v-model="brand")
-        //- option(value="") --Please choose a brand--
-        option(v-for="brand in brands" :value="brand") {{ brand }}
+      label(for="brand-select") Brand*
+      input(type="text" name="model" v-model="brand" id="brand" placeholder="Canyon, Cube.." required)
 
     .form-field
-      label(for="model") Model
-      input(type="text" name="model" v-model="model" id="model")
+      label(for="model") Model*
+      input(type="text" name="model" v-model="model" id="model" placeholder="Stereo" required)
 
     .form-field
-      label(for="price") Price ($)
-      input(type="number" name="price" v-model="price" id="price" placeholder="1000")
+      label(for="price") Price($)*
+      input(type="number" name="price" v-model="price" id="price" placeholder="1000" required)
 
     .form-field
-      label(for="stock") Stock
-      input(type="number" name="stock" v-model="stock" id="stock" placeholder="5")
+      label(for="stock") Stock*
+      input(type="number" name="stock" v-model="stock" id="stock" placeholder="1" required)
 
     .form-field
       label(for="photo") Upload photo(s)
@@ -26,6 +24,7 @@
         ref="fileRef"
         name="photo"
         @change="selectFile"
+        required
         accept="image/png, image/jpeg")
       p(v-if="!file").
         Maximum {{ getSizeInMB(this.maxFileSize) }}MB allowed (png, jpg, jpeg)
@@ -38,20 +37,19 @@
       img(:src="previewURL" width="250")
 
     .form-field
-      input(type="submit" name="submit" value="Create" @click="createProduct()")
+      input(type="submit" name="submit" value="Create" @click="createProduct()" :disabled="!validForm")
 </template>
 
 <script>
 export default {
   data() {
     return {
-      brands: ['Canyon', 'Cube', 'Merida', 'Vitus', 'YT', 'Yeti'],
-      brand: 'default',
-      model: 'default',
-      price: 'default',
-      stock: 'default',
+      brand: '',
+      model: '',
+      price: '1250',
+      stock: '1',
       file: '',
-      validFile: false,
+      validFile: true,
       maxFileSize: 3 * 1000000,
       previewURL: ''
     }
@@ -69,7 +67,7 @@ export default {
       }
     },
     async createProduct() {
-      if (this.brand && this.model && this.price && this.stock && this.validFile) {
+      if (this.validForm) {
         const url = `${this.$config.apiUrl}`;        
         const formData = new FormData();
         formData.append('file', this.file);
@@ -90,12 +88,15 @@ export default {
         } catch (err) {
           console.log(err);
         }
-      } else {
-        console.log('form fields not valid')
       }
     },
     getSizeInMB(value) {
       return (value/ (Math.pow(10, 6))).toFixed(3)
+    }
+  },
+  computed: {
+    validForm() {
+      return this.validFile // && this.brand && this.model && this.price && this.stock;
     }
   }
 };
