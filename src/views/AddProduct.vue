@@ -62,12 +62,14 @@ export default {
     selectFile() {
       this.file = this.$refs.fileRef.files[0];
 
-      this.previewURL = URL.createObjectURL(this.file);
-
-      if (this.file.size < this.maxFileSize) {
-        this.validFile = true;
-      } else {
-        this.validFile = false;
+      if(this.file) {
+        if (this.file.size < this.maxFileSize && this.file) {
+          this.validFile = true;
+          this.previewURL = URL.createObjectURL(this.file);
+        } else {
+          this.validFile = false;
+          this.previewURL = '';
+        }
       }
     },
     async createProduct() {
