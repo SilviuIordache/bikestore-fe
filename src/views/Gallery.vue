@@ -6,8 +6,11 @@
     search-bar.mb-2
     .results.mb-2.
       {{ items.length }} results found in {{ requestTime / 1000 }} seconds.
-    card-item-list(v-if="items.length > 0" :items="items")
-    .no-results-found(v-else) No results found
+    .items-container(v-if="!requestInProgress")
+      card-item-list(v-if="items.length > 0" :items="items")
+      .no-results-found(v-else) No results found
+    .spinner-border.text-primary(v-else role='status')
+      span.sr-only Loading...
 </template>
 
 <script>
@@ -23,7 +26,8 @@ export default {
   data() {
     return {
       items: [],
-      requestTime: 0
+      requestTime: 0,
+      requestInProgress: false
     }
   },
   async created() {
@@ -36,6 +40,7 @@ export default {
   },
   methods: {
     async getBikes(query) {
+      this.requestInProgress = true;
       let url = `${this.$config.apiUrl}`;
 
       if(query) {
@@ -51,9 +56,10 @@ export default {
         console.log(`Error retrieving items: ${err}`)
       } finally {
         this.requestTime = Date.now() - requestStartTime;
-      }
-      if (response) {
-        this.items = response.data.data.bikes;
+        if (response) {
+          this.items = response.data.data.bikes;
+        }
+        this.requestInProgress = false;
       }
     },
   },
