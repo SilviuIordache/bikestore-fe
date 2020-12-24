@@ -23,7 +23,10 @@
                   td {{ item.brand }}
                   td {{ item.model }}
                   td
-                    input(type="number" id="amount" name="amount" min="1" max="5" :value="item.amount")
+                    select(name="amount")
+                      option(v-for="val in values" :selected="selectedState(val, item.amount)").
+                        {{ val }}
+                   
                   td {{ item.price * item.amount }}
                   td
                     a.delete-button(@click="removeItem(item.id)") Remove
@@ -47,7 +50,8 @@ export default {
   name: 'ShoppingCart',
   data() {
     return {
-      items: []
+      items: [],
+      values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
   },
   mounted(){
@@ -63,6 +67,12 @@ export default {
     },
     getItems() {
       this.items = cart.getItems();
+    },
+    selectedState(val, amount) {
+      if (val === amount)
+        return true
+      else
+        return false
     }
   },
   computed: {
