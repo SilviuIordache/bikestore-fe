@@ -1,37 +1,48 @@
 <template lang="pug">
   .container
-    .shopping-cart
-      .title.
-        Shopping Cart
-      table.table.table-striped
-        thead
-          tr
-            th(scope='col') #
-            th(scope='col') id
-            th(scope='col') brand
-            th(scope='col') model
-            th(scope='col') amount
-            th(scope='col') price
-        tbody(v-for="(item, index) in items")
-          tr
-            th(scope='row') {{ index }}
-            td {{ item.id }}
-            td {{ item.brand }}
-            td {{ item.model }}
-            td
-              input(type="number" id="amount" name="amount" min="1" max="5" :value="item.amount")
-            td {{ item.price * item.amount }}
-        tbody
-          tr
-            th(scope='row')
-            td(colspan='3')
-            td
-              .font-weight-bold TOTAL
-            td {{ totalPrice }}
-      
+    .row.d-flex.justify-content-center
+      .col-8
+        .shopping-cart
+          .title.my-4.
+            Your Shopping Cart
+          .empty-cart(v-if="!productsPresent").
+            You have no items in your cart
+          .non-empty-cart(v-else)
+            table.table.table-striped
+              thead
+                tr
+                  th(scope='col') #
+                  th(scope='col') brand
+                  th(scope='col') model
+                  th(scope='col') amount
+                  th(scope='col') price
+                  th
+              tbody(v-for="(item, index) in items")
+                tr
+                  th(scope='row') {{ index + 1}}
+                  td {{ item.brand }}
+                  td {{ item.model }}
+                  td
+                    input(type="number" id="amount" name="amount" min="1" max="5" :value="item.amount")
+                  td {{ item.price * item.amount }}
+                  td
+                    a.delete-button(@click="removeItem(item.id)") Remove
+
+              tbody
+                tr
+                  th(scope='row')
+                  td(colspan='2')
+                  td
+                    .font-weight-bold TOTAL
+                  td {{ totalPrice }}
+                  td
+                
+            .checkout-container.text-right
+              button.btn.btn-primary(type="button") Checkout
 </template>
 
 <script>
+import cart from '../util/cart.js';
 export default {
   name: 'ShoppingCart',
   data() {
@@ -40,12 +51,19 @@ export default {
     }
   },
   mounted(){
-    this.items = JSON.parse(localStorage.getItem('cart-items'));
+    this.getItems();
   },
   methods: {
     addInputPlaceholder() {
       document.getElementById('search-input').placeholder = this.placeholderText;
     },
+    removeItem(id) {
+      cart.removeItem(id);
+      this.getItems();
+    },
+    getItems() {
+      this.items = cart.getItems();
+    }
   },
   computed: {
     totalPrice() {
@@ -54,7 +72,28 @@ export default {
         total += item.price * item.amount;
       }
       return total;
+    },
+    productsPresent() {
+      if (this.items) {
+        if (this.items.length > 0) {
+          return true;
+        }
+      }
+      return false;
     }
   }
 };
 </script>
+
+<style scoped lang="stylus">
+  .title
+    font-size 2rem
+  .delete-button
+    font-size 0.8rem
+    cursor pointer
+    color #ff614f
+    opacity 0.7
+    &:hover
+      color #ff614f
+      opacity 1
+</style>
