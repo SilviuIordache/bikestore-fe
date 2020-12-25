@@ -35,7 +35,8 @@ export default {
   },
   methods: {
     updateCart(value) {
-      cart.updateItem(this.item.id, value);
+      cart.updateItem(this.item.id, parseInt(value,10));
+      this.$ebus.$emit('cartItemsUpdated');
       this.item.amount = value;
     },
     selectedState(val, amount) {
@@ -46,12 +47,10 @@ export default {
     },
     removeItem(id) {
       cart.removeItem(id);
+      this.$ebus.$emit('cartItemsUpdated');
       this.$parent.$emit('CartItem:itemUpdated')
     },
   },
-  computed: {
-
-  }
 }
 </script>
 
