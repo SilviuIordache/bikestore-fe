@@ -21,9 +21,9 @@
             .shipping-price-container.d-flex.justify-content-between
               span Shipping
               span ${{shippingCost}}
-            .subtotal-container.d-flex.justify-content-between
+            .subtotal-container.d-flex.justify-content-between.mt-3.pt-1
               span Subtotal
-              span {{ totalPrice + shippingCost}}
+              span ${{ totalPrice + shippingCost}}
           .checkout-button-container.text-right.mt-4
             button.btn.btn-primary(type="button") Checkout
 </template>
@@ -84,4 +84,7 @@ export default {
     .checkout-container
       border-radius 0.25rem
       background-color white
+
+      .subtotal-container
+        border-top 1px solid black
 </style>
