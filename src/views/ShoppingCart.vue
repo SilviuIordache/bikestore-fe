@@ -1,79 +1,58 @@
 <template lang="pug">
-  .container
-    .row.d-flex.justify-content-center
-      .col-8
+  .container#shopping-cart-container.mt-2
+    .row
+      .col-12
+        h3.my-4.
+          Your Shopping Cart
+    .row(v-if="!productsPresent")
+      .col-12.empty-cart.pb-3.
+        You have no items in your cart
+    .row.d-flex.justify-content-center.pb-3(v-else)
+      .col-12.col-xl-9
         .shopping-cart
-          .title.my-4.
-            Your Shopping Cart
-          .empty-cart(v-if="!productsPresent").
-            You have no items in your cart
-          .non-empty-cart(v-else)
-            table.table.table-striped
-              thead
-                tr
-                  th(scope='col') #
-                  th(scope='col') brand
-                  th(scope='col') model
-                  th(scope='col') amount
-                  th(scope='col') price
-                  th
-              tbody(v-for="(item, index) in items")
-                tr
-                  th(scope='row') {{ index + 1}}
-                  td {{ item.brand }}
-                  td {{ item.model }}
-                  td
-                    select(name="amount")
-                      option(v-for="val in values" :selected="selectedState(val, item.amount)").
-                        {{ val }}
-                   
-                  td {{ item.price * item.amount }}
-                  td
-                    a.delete-button(@click="removeItem(item.id)") Remove
-
-              tbody
-                tr
-                  th(scope='row')
-                  td(colspan='2')
-                  td
-                    .font-weight-bold TOTAL
-                  td {{ totalPrice }}
-                  td
-                
-            .checkout-container.text-right
-              button.btn.btn-primary(type="button") Checkout
+          CartItem.mb-2(v-for="(item, index) in items" :item="item")
+      .col-12.col-xl-3
+        .checkout-container.p-2
+          .total-amount
+            .font-weight-bold.mb-4 TOTAL
+            .total-price.d-flex.justify-content-between
+              span Total
+              span ${{ totalPrice }}
+            .shipping-price-container.d-flex.justify-content-between
+              span Shipping
+              span ${{shippingCost}}
+            .subtotal-container.d-flex.justify-content-between
+              span Subtotal
+              span {{ totalPrice + shippingCost}}
+          .checkout-button-container.text-right.mt-4
+            button.btn.btn-primary(type="button") Checkout
 </template>
 
 <script>
+import CartItem from '../components/CartItem.vue';
 import cart from '../util/cart.js';
 export default {
   name: 'ShoppingCart',
+  components: {
+    'CartItem': CartItem
+  },
   data() {
     return {
       items: [],
-      values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      shippingCost: 100
     }
   },
   mounted(){
     this.getItems();
+
+    this.$on('CartItem:itemUpdated', () => {
+      this.getItems();
+    })
   },
   methods: {
-    addInputPlaceholder() {
-      document.getElementById('search-input').placeholder = this.placeholderText;
-    },
-    removeItem(id) {
-      cart.removeItem(id);
-      this.getItems();
-    },
     getItems() {
       this.items = cart.getItems();
     },
-    selectedState(val, amount) {
-      if (val === amount)
-        return true
-      else
-        return false
-    }
   },
   computed: {
     totalPrice() {
@@ -96,14 +75,13 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .title
-    font-size 2rem
-  .delete-button
-    font-size 0.8rem
-    cursor pointer
-    color #ff614f
-    opacity 0.7
-    &:hover
-      color #ff614f
-      opacity 1
+  #shopping-cart-container
+    border-radius 0.25rem
+    background-color #ebf6fc
+    .title
+      font-size 1.5rem
+    
+    .checkout-container
+      border-radius 0.25rem
+      background-color white
 </style>
