@@ -25,7 +25,7 @@ import { EventBus } from '../util/EventBus.js';
 import cart from '../util/cart.js';
 
 export default {
-  name: 'CardItem',
+  name: 'GalleryCard',
   props: {
     id: {
       type: String,
