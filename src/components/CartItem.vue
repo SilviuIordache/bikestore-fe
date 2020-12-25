@@ -14,8 +14,9 @@
             option(v-for="val in values" :selected="selectedState(val, item.amount)").
               {{ val }}
       .col-12.col-md-4.d-flex.align-items-center.justify-content-end
-        .right-container
-          p.price-container.text-right ${{ item.price }}
+        .right-container.text-right
+          p.price-container.text-right.mb-1 ${{ item.price * item.amount}}
+          p.small(v-if="item.amount > 1") {{ item.amount }} x ${{item.price}}
           .actions-container.d-flex
             .cart-button.mr-3 Favorite
             .cart-button(@click="removeItem(item.id)") Remove
@@ -34,7 +35,8 @@ export default {
   },
   methods: {
     updateCart(value) {
-      console.log(value);
+      cart.updateItem(this.item.id, value);
+      this.item.amount = value;
     },
     selectedState(val, amount) {
       if (val === amount)

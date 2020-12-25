@@ -27,7 +27,7 @@ class Cart{
   removeItem(id) {
     let items = JSON.parse(this.storage.getItem(this.cartKey));
 
-    const confirm = window.confirm(`Delete product ${id} from your shopping cart?`);
+    const confirm = window.confirm(`Delete product this product from your shopping cart?`);
     if (confirm) {
       if (items) {
         for (let i = 0; i < items.length; i++) {
@@ -38,6 +38,17 @@ class Cart{
         }
       }
     }
+  }
+
+  updateItem(id, value) {
+    let items = JSON.parse(this.storage.getItem(this.cartKey));
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === id) {
+        items[i].amount = value;
+        this.storage.setItem(this.cartKey, JSON.stringify(items));
+      }
+    }
+    
   }
 
   getItems() {
