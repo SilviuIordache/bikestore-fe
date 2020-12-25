@@ -10,7 +10,7 @@
       .col-12.col-md-2.d-flex.align-items-center
         .amount-container
           label.mr-2 Qty
-          select(name="amount" @change="updateCart(key)" v-model="key")
+          select(name="amount" @change="updateCart(amount)" v-model="amount")
             option(v-for="val in values" :selected="selectedState(val, item.amount)").
               {{ val }}
       .col-12.col-md-4.d-flex.align-items-center.justify-content-end
@@ -29,7 +29,7 @@ export default {
   props: ['item'],
   data() {
     return {
-      key: this.item.amount,
+      amount: this.item.amount,
       values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
   },
