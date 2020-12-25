@@ -10,18 +10,31 @@
     .shopping-cart
       router-link(to="/cart")
         i.fas.fa-shopping-cart.mr-2
-        | CART
-        span.
+        span CART
+        span(v-if="itemsNumber > 0") ({{ itemsNumber }})
 </template>
 
 <script>
-import { EventBus } from '../util/EventBus';
+
+import cart from '../util/cart.js';
 export default {
   name: 'Navbar',
+  data() {
+    return {
+      itemsNumber: 0
+    }
+  },
+  methods: {
+    refreshCartItems() {
+      this.itemsNumber = cart.getItemsNumber();
+    }
+  },
   mounted() {
-    EventBus.$on('productAddedToCart', (object) => {
-      console.log(object.model);
-    })
+    this.$ebus.$on('cartItemsUpdated', () => {
+      this.refreshCartItems();
+    });
+
+    this.refreshCartItems();
   }
 };
 </script>
@@ -32,8 +45,7 @@ export default {
   ul
     list-style-type none
     padding 0
-
-  li
-    display inline-block
-    margin 0 10px
+    li
+      display inline-block
+      margin 0 10px
 </style>

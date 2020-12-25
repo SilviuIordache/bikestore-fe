@@ -48,12 +48,20 @@ class Cart{
         this.storage.setItem(this.cartKey, JSON.stringify(items));
       }
     }
-    
   }
 
   getItems() {
     let items = JSON.parse(this.storage.getItem(this.cartKey));
     return items;
+  }
+
+  getItemsNumber() {
+    let items = JSON.parse(this.storage.getItem(this.cartKey));
+    let total = 0;
+    items.forEach((item) => {
+      total += item.amount;
+    })
+    return total;
   }
 }
 

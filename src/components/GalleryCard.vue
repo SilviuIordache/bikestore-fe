@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { EventBus } from '../util/EventBus.js';
 import cart from '../util/cart.js';
 
 export default {
@@ -71,7 +70,8 @@ export default {
         imageUrl: this.imageUrl,
         amount: 1
       }
-      cart.addItem(newItem)
+      cart.addItem(newItem);
+      this.$ebus.$emit('cartItemsUpdated');
     }
   }
 };
