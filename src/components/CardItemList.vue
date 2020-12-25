@@ -1,7 +1,7 @@
 <template lang="pug">
   #card-item-list.row.p-1
     .col-12.col-md-6.col-lg-4.d-flex.p-1(v-for="item in items")
-      card-item(
+      Gallery-Card(
         :id="item._id"
         :key="item.id"
         :brand="item.brand"
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import CardItem from '../components/CardItem.vue';
+import GalleryCard from '../components/GalleryCard.vue';
 
 export default {
   components: {
-    'card-item': CardItem,
+    'Gallery-Card': GalleryCard,
   },
   props: {
     items: {
