@@ -68,6 +68,7 @@ export default {
         brand: this.brand,
         model: this.model,
         price: this.price,
+        imageUrl: this.imageUrl,
         amount: 1
       }
       cart.addItem(newItem)
