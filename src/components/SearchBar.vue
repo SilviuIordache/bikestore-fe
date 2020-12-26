@@ -1,13 +1,14 @@
 <template lang="pug">
   .search-bar.d-flex
-    input#search-input(
-      type="text"
-      v-model="query"
-      :placeholder="placeholderText"
-      @focus="removeInputPlaceholder()"
-      @blur="addInputPlaceholder()")
-    button#search-button(@click="emitSearch()")
-      i.fas.fa-search
+    form(@submit.prevent="emitSearch()")
+      input#search-input(
+        type="text"
+        v-model="query"
+        :placeholder="placeholderText"
+        @focus="removeInputPlaceholder()"
+        @blur="addInputPlaceholder()")
+      button#search-button(type="submit" @click="emitSearch()")
+        i.fas.fa-search
 </template>
 
 <script>
@@ -42,4 +43,6 @@ export default {
     height 3rem
   #search-button
     width 3rem
+    height 3rem
+    padding 0
 </style>
