@@ -1,14 +1,16 @@
 <template lang="pug">
-  .search-bar.d-flex
-    form(@submit.prevent="emitSearch()")
-      input#search-input(
-        type="text"
-        v-model="query"
-        :placeholder="placeholderText"
-        @focus="removeInputPlaceholder()"
-        @blur="addInputPlaceholder()")
-      button#search-button(type="submit" @click="emitSearch()")
-        i.fas.fa-search
+  .row.search-bar.d-flex
+    .col-12
+      form.position-relative.w-100(@submit.prevent="emitSearch()")
+        input#search-input(
+          type="text"
+          v-model="query"
+          :placeholder="placeholderText"
+          @focus="removeInputPlaceholder()"
+          @blur="addInputPlaceholder()")
+        //- button#search-button(type="submit" @click="emitSearch()")
+        .glass-icon-container.position-absolute
+          i.fas.fa-search
 </template>
 
 <script>
@@ -16,7 +18,7 @@ export default {
   name: 'SearchBar',
   data() {
     return {
-      placeholderText: ' Cube, Canyon, Merida...',
+      placeholderText: ' Search for a product..',
       query: ''
     }
   },
@@ -39,10 +41,14 @@ export default {
 
 <style lang="stylus" scoped>
   #search-input
-    width 25rem
+    padding-left 3rem
+    width 100%
     height 3rem
-  #search-button
-    width 3rem
-    height 3rem
-    padding 0
+    border-radius 1rem
+    &:focus
+      outline none
+      box-shadow 0 0 0 3px rgba(21, 156, 228, 0.4)
+  .glass-icon-container
+    top 0.7rem
+    left 0.8rem
 </style>
