@@ -9,7 +9,7 @@ class Cart{
     if (items) {
       let itemInCart = false;
       for (let i = 0; i < items.length; i++) {
-        if (items[i].id === item.id) {
+        if (items[i]._id === item._id) {
           itemInCart = true;
           items[i].amount++;
         }
@@ -31,7 +31,7 @@ class Cart{
     if (confirm) {
       if (items) {
         for (let i = 0; i < items.length; i++) {
-          if (items[i].id === id) {
+          if (items[i]._id === id) {
             items.splice(i, 1);
             this.storage.setItem(this.cartKey, JSON.stringify(items));
           }
@@ -43,7 +43,7 @@ class Cart{
   updateItem(id, value) {
     let items = JSON.parse(this.storage.getItem(this.cartKey));
     for (let i = 0; i < items.length; i++) {
-      if (items[i].id === id) {
+      if (items[i]._id === id) {
         items[i].amount = value;
         this.storage.setItem(this.cartKey, JSON.stringify(items));
       }
@@ -58,9 +58,12 @@ class Cart{
   getItemsNumber() {
     let items = JSON.parse(this.storage.getItem(this.cartKey));
     let total = 0;
-    items.forEach((item) => {
-      total += item.amount;
-    })
+
+    if(items) {
+      items.forEach((item) => {
+        total += item.amount;
+      });
+    }
     return total;
   }
 }

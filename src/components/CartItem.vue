@@ -19,7 +19,7 @@
           p.small(v-if="item.amount > 1") {{ item.amount }} x ${{item.price}}
           .actions-container.d-flex
             .cart-button.mr-3 Favorite
-            .cart-button(@click="removeItem(item.id)") Remove
+            .cart-button(@click="removeItem(item._id)") Remove
     
 </template>
 
