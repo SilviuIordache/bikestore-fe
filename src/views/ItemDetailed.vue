@@ -3,21 +3,21 @@
     .row#inner-container
       .col-12.col-md-4
         .image-container(v-if="imageLoaded")
-          img(:src='imageUrl' width='100%')
+          img(:src='item.imageUrl' width='100%')
       .col-12.col-md-8
         .top-container
-          h1 {{ brand }}
-          p {{ model }}
+          h1 {{ item.brand }}
+          p {{ item.model }}
         .bottom-container
           .price-part.d-flex.justify-content-between.align-items-center
             h5.d-inline.mb-0.
-              {{price}} $
+              {{ item. price}} $
           button Add to cart
           button Add to compare
 
     p.stock-container.mb-5
-      span(v-if="stock > 5") In stock
-      span(v-else-if="stock > 0 && stock < 5") Only {{ stock }} left
+      span(v-if="item.stock > 5") In stock
+      span(v-else-if="item.stock > 0 && item.stock < 5") Only {{ item.stock }} left
       span(v-else) Out of stock
 
     
@@ -28,11 +28,7 @@
 export default {
   data() {
     return {
-      brand: '',
-      model: '',
-      stock: '',
-      price: '',
-      imageUrl: '',
+      item: '',
       imageLoaded: false
     }
   },
@@ -51,13 +47,8 @@ export default {
       } catch (err) { 
         console.log(`Error retrieving item: ${err}`)
       }
-
       if (response) {
-        this.brand = response.data.data.bike.brand;
-        this.model = response.data.data.bike.model;
-        this.stock = response.data.data.bike.stock;
-        this.price = response.data.data.bike.price;
-        this.imageUrl = response.data.data.bike.imageUrl;
+        this.item = response.data.data.bike;
       }
     }
   }
