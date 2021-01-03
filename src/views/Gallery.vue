@@ -3,25 +3,27 @@
     .gallery-banner.py-3
       h1 Welcome to the Bike Store
       p Browse, find and buy your ideal bike
-    search-bar.mb-2
+    SearchBar.mb-2
     .results.mb-2.
       {{ items.length }} results found in {{ requestTime / 1000 }} seconds.
     .items-container(v-if="!requestInProgress")
-      card-item-list(v-if="items.length > 0" :items="items")
+      #card-item-list.row.p-1(v-if="items.length > 0")
+        .col-12.col-md-6.col-lg-4.d-flex.p-1(v-for="item in items")
+          Gallery-Card(:item="item")
       .no-results-found(v-else) No results found
     .spinner-border.text-primary(v-else role='status')
       span.sr-only Loading...
 </template>
 
 <script>
-import CardItemList from '../components/CardItemList.vue';
+import GalleryCard from '../components/GalleryCard.vue';
 import SearchBar from '../components/SearchBar.vue';
 
 export default {
   name: 'Gallery',
   components: {
-    'card-item-list': CardItemList,
-    'search-bar': SearchBar
+    'GalleryCard': GalleryCard,
+    'SearchBar': SearchBar
   },
   data() {
     return {
@@ -67,3 +69,8 @@ export default {
 };
 </script>
 
+<style lang="stylus" scoped>
+  #card-item-list
+    background-color #f0f2f0
+    border-radius 0.3rem
+</style>
