@@ -1,7 +1,8 @@
 <template lang="pug">
   button.add-to-cart-button(@click.stop="addToCart()" :class="{'button-disabled': item.stock === 0 }")
     i.fas.fa-cart-plus.mr-2
-    | Add
+    span(v-if="item.stock > 0") Add
+    span(v-else) Out of Stock
 </template>
 
 <script>
