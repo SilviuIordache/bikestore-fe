@@ -9,7 +9,8 @@
 
     .bike-price-details
       p.stock-container.mb-5.text-center.text-muted.mt-2
-        span(v-if="item.stock > 0 && item.stock < 5") {{ item.stock }} items left
+        span(v-if="item.stock > 3") In Stock
+        span(v-if="item.stock >= 2 && item.stock <= 3") {{ item.stock }} items left
         span(v-if="item.stock==0") Out of stock
 
       .price-part.d-flex.justify-content-between.align-items-center
