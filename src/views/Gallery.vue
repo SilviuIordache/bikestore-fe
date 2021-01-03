@@ -3,7 +3,9 @@
     .gallery-banner.py-3
       h1 Welcome to the Bike Store
       p Browse, find and buy your ideal bike
-    SearchBar.mb-2
+    .row
+      .col-12.col-md-6
+        SearchBar.mb-2
     .results.mb-2.
       {{ items.length }} results found in {{ requestTime / 1000 }} seconds.
     .items-container(v-if="!requestInProgress")
