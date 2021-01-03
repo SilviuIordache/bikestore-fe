@@ -1,13 +1,15 @@
 <template lang="pug">
   .container
-    .gallery-banner.py-3
-      h1 Welcome to the Bike Store
-      p Browse, find and buy your ideal bike
+    .row.gallery-banner.py-3
+      .col-12
+        h1 Welcome to the Bike Store
+        p Browse, find and buy your ideal bike
     .row
       .col-12.col-md-6
         SearchBar.mb-2
-    .results.mb-2.
-      {{ items.length }} results found in {{ requestTime / 1000 }} seconds.
+    .row.results.mb-2
+      .col-12.
+        {{ items.length }} results found in {{ requestTime / 1000 }} seconds.
     .items-container(v-if="!requestInProgress")
       #card-item-list.row.p-1(v-if="items.length > 0")
         .col-12.col-md-6.col-lg-4.d-flex.p-1(v-for="item in items")
