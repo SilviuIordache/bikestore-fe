@@ -7,7 +7,7 @@
     .row
       .col-12.col-md-6
         SearchBar.mb-2
-    .row.results.mb-2
+    .row.results.mb-2(v-if="!requestInProgress")
       .col-12.
         {{ items.length }} results found in {{ requestTime / 1000 }} seconds.
     .items-container(v-if="!requestInProgress")
@@ -15,8 +15,10 @@
         .col-12.col-md-6.col-lg-4.d-flex.p-1(v-for="item in items")
           Gallery-Card(:item="item")
       .no-results-found(v-else) No results found
-    .spinner-border.text-primary(v-else role='status')
-      span.sr-only Loading...
+    .loading-container(v-else)
+      .spinner-border.text-primary(role='status')
+        span.sr-only Loading...
+      p Please wait, the first request might take around 10-15 seconds to wake the server machine up.
 </template>
 
 <script>
